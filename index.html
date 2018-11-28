@@ -32,64 +32,69 @@
       var input = document.querySelector('input');
       // 获取 preview 元素
       var preview = document.querySelector('.preview');
-      input.onchange = function () {
-          var file = input.files[0],
-            reader = new FileReader(),
-            image = new Image();
+      input.onchange = function() {
+        var file = input.files[0],
+          reader = new FileReader(),
+          image = new Image();
+        if (file) {
+          EXIF.getData(file, function() {
+            Orientation = EXIF.getTag(this, 'Orientation');
+            alert(Orientation);
+          });
+        }
 
-          if (file) {
-            EXIF.getData(file, function () {
-              Orientation = EXIF.getTag(this, 'Orientation');
-              alert(Orientation)
-            });
-        //     reader.onload = function (ev) {
-        //       image.src = ev.target.result;
-        //       image.onload = function () {
-        //         var imgWidth = this.width,
-        //           imgHeight = this.height;
-        //         // 控制上传图片的宽高
-        //         if (imgWidth > imgHeight && imgWidth > 750) {
-        //           imgWidth = 750;
-        //           imgHeight = Math.ceil(750 * this.height / this.width);
-        //         } else if (imgWidth < imgHeight && imgHeight > 1334) {
-        //           imgWidth = Math.ceil(1334 * this.width / this.height);
-        //           imgHeight = 1334;
-        //         }
-
-        //         var canvas = document.createElement("canvas"),
-        //           ctx = canvas.getContext('2d');
-        //         canvas.width = imgWidth;
-        //         canvas.height = imgHeight;
-        //         if (Orientation && Orientation != 1) {
-        //           switch (Orientation) {
-        //             case 6:     // 旋转90度
-        //               canvas.width = imgHeight;
-        //               canvas.height = imgWidth;
-        //               ctx.rotate(Math.PI / 2);
-        //               // (0,-imgHeight) 从旋转原理图那里获得的起始点
-        //               ctx.drawImage(this, 0, -imgHeight, imgWidth, imgHeight);
-        //               break;
-        //             case 3:     // 旋转180度
-        //               ctx.rotate(Math.PI);
-        //               ctx.drawImage(this, -imgWidth, -imgHeight, imgWidth, imgHeight);
-        //               break;
-        //             case 8:     // 旋转-90度
-        //               canvas.width = imgHeight;
-        //               canvas.height = imgWidth;
-        //               ctx.rotate(3 * Math.PI / 2);
-        //               ctx.drawImage(this, -imgWidth, 0, imgWidth, imgHeight);
-        //               break;
-        //           }
-        //         } else {
-        //           ctx.drawImage(this, 0, 0, imgWidth, imgHeight);
-        //         }
-        //         img.src = canvas.toDataURL("image/jpeg", 0.8);
+        // if (file) {
+        //   EXIF.getData(file, function () {
+        //     Orientation = EXIF.getTag(this, 'Orientation');
+        //     alert(Orientation)
+        //   });
+        //   reader.onload = function (ev) {
+        //     image.src = ev.target.result;
+        //     image.onload = function () {
+        //       var imgWidth = this.width,
+        //         imgHeight = this.height;
+        //       // 控制上传图片的宽高
+        //       if (imgWidth > imgHeight && imgWidth > 750) {
+        //         imgWidth = 750;
+        //         imgHeight = Math.ceil(750 * this.height / this.width);
+        //       } else if (imgWidth < imgHeight && imgHeight > 1334) {
+        //         imgWidth = Math.ceil(1334 * this.width / this.height);
+        //         imgHeight = 1334;
         //       }
-        //     }
-        //     reader.readAsDataURL(file);
-        //   }
-        // }
 
+        //       var canvas = document.createElement("canvas"),
+        //         ctx = canvas.getContext('2d');
+        //       canvas.width = imgWidth;
+        //       canvas.height = imgHeight;
+        //       if (Orientation && Orientation != 1) {
+        //         switch (Orientation) {
+        //           case 6:     // 旋转90度
+        //             canvas.width = imgHeight;
+        //             canvas.height = imgWidth;
+        //             ctx.rotate(Math.PI / 2);
+        //             // (0,-imgHeight) 从旋转原理图那里获得的起始点
+        //             ctx.drawImage(this, 0, -imgHeight, imgWidth, imgHeight);
+        //             break;
+        //           case 3:     // 旋转180度
+        //             ctx.rotate(Math.PI);
+        //             ctx.drawImage(this, -imgWidth, -imgHeight, imgWidth, imgHeight);
+        //             break;
+        //           case 8:     // 旋转-90度
+        //             canvas.width = imgHeight;
+        //             canvas.height = imgWidth;
+        //             ctx.rotate(3 * Math.PI / 2);
+        //             ctx.drawImage(this, -imgWidth, 0, imgWidth, imgHeight);
+        //             break;
+        //         }
+        //       } else {
+        //         ctx.drawImage(this, 0, 0, imgWidth, imgHeight);
+        //       }
+        //       img.src = canvas.toDataURL("image/jpeg", 0.8);
+        //     }
+        //   }
+        //   reader.readAsDataURL(file);
+        // }
+      };
 
       input.addEventListener('change', updateImageDisplay);
 
