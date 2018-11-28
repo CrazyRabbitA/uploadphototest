@@ -5,18 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Document</title>
+    <style>
+      .wraper {
+        display: inline-block;
+        border: solid 1px red;
+      }
+      #image_uploads {
+        width: 100px;
+        height: 100px;
+      }
+    </style>
   </head>
   <body>
     <form>
       <div>
-        <label for="image_uploads">Choose images to upload (PNG, JPG)</label>
-        <input
-          type="file"
-          id="image_uploads"
-          name="image_uploads"
-          accept=".jpg, .jpeg, .png"
-          multiple
-        />
+        <div class="wraper">
+          <input
+            type="file"
+            id="image_uploads"
+            accept=".jpg, .jpeg, .png"
+            multiple
+          />
+        </div>
       </div>
       <div class="preview"><p>No files currently selected for upload</p></div>
       <div><button>Submit</button></div>
