@@ -36,10 +36,12 @@
         var file = input.files[0],
           reader = new FileReader(),
           image = new Image();
+        var u = navigator.userAgent;
         if (file) {
           EXIF.getData(file, function() {
             Orientation = EXIF.getTag(this, 'Orientation');
             alert(Orientation);
+            alert(u);
           });
         }
 
