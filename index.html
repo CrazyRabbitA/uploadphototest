@@ -23,15 +23,18 @@
           <input type="file" id="image_uploads" accept="image/*" multiple />
         </div>
       </div>
-      <div class="preview"><p>No files currently selected for upload</p></div>
-      <div><button>Submit</button></div>
+      <img src="" id="preview" />
+      <!--
+        <div class="preview"><p>No files currently selected for upload</p></div>
+        <div><button>Submit</button></div>
+      -->
     </form>
     <script src="exif.js"></script>
     <script>
       // 获取 input 元素
       var input = document.querySelector('#image_uploads');
       // 获取 preview 元素
-      var preview = document.querySelector('.preview');
+      var preview = document.querySelector('#preview');
       input.onchange = function() {
         var file = input.files[0],
           reader = new FileReader(),
@@ -58,12 +61,12 @@
               var imgWidth = this.width,
                 imgHeight = this.height;
               // 控制上传图片的宽高
-              if (imgWidth > imgHeight && imgWidth > 750) {
-                imgWidth = 750;
-                imgHeight = Math.ceil((750 * this.height) / this.width);
-              } else if (imgWidth < imgHeight && imgHeight > 1334) {
-                imgWidth = Math.ceil((1334 * this.width) / this.height);
-                imgHeight = 1334;
+              if (imgWidth > imgHeight && imgWidth > 400) {
+                imgWidth = 400;
+                imgHeight = Math.ceil((400 * this.height) / this.width);
+              } else if (imgWidth < imgHeight && imgHeight > 300) {
+                imgWidth = Math.ceil((300 * this.width) / this.height);
+                imgHeight = 300;
               }
 
               var canvas = document.createElement('canvas'),
@@ -99,7 +102,7 @@
               } else {
                 ctx.drawImage(this, 0, 0, imgWidth, imgHeight);
               }
-              image.src = canvas.toDataURL('image/jpeg', 0.8);
+              preview.src = canvas.toDataURL('image/jpeg', 0.8);
             };
           };
           reader.readAsDataURL(file);
