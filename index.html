@@ -38,13 +38,13 @@
           image = new Image();
         Orientation = null;
         var u = navigator.userAgent;
-        // if (file) {
-        //   EXIF.getData(file, function() {
-        //     Orientation = EXIF.getTag(this, 'Orientation');
-        //     alert(Orientation);
-        //     alert(u);
-        //   });
-        // }
+        if (file) {
+          EXIF.getData(file, function() {
+            Orientation = EXIF.getTag(this, 'Orientation');
+            alert(Orientation);
+            alert(u);
+          });
+        }
 
         // if (file) {
         //   EXIF.getData(file, function () {
