@@ -35,12 +35,27 @@
       var input = document.querySelector('#image_uploads');
       // 获取 preview 元素
       var preview = document.querySelector('#preview');
+      //定义一些以后要显示的变量
+      var initialWidth, initialHeight, initialSize;
+      function returnFileSize(number) {
+        if (number < 1024) {
+          return number + 'bytes';
+        } else if (number > 1024 && number < 1048576) {
+          return (number / 1024).toFixed(1) + 'KB';
+        } else if (number > 1048576) {
+          return (number / 1048576).toFixed(1) + 'MB';
+        }
+      }
+
       input.onchange = function() {
         var file = input.files[0],
           reader = new FileReader(),
           image = new Image();
         Orientation = null;
+        initialSize = returnFileSize(file.size);
         console.log(file);
+        console.log(initialSize);
+
         var u = navigator.userAgent;
         // if (file) {
         //   EXIF.getData(file, function() {
@@ -56,14 +71,18 @@
             alert(Orientation);
           });
           reader.onload = function(ev) {
+            console.log(ev.target.result);
             image.src = ev.target.result;
             image.onload = function() {
               var imgWidth = this.width,
                 imgHeight = this.height;
+              console.log(imgWidth);
+              console.log(imgHeight);
+
               // 控制上传图片的宽高
-              if (imgWidth > imgHeight && imgWidth > 400) {
-                imgWidth = 400;
-                imgHeight = Math.ceil((400 * this.height) / this.width);
+              if (imgWidth > imgHeight && imgWidth > 350) {
+                imgWidth = 350;
+                imgHeight = Math.ceil((350 * this.height) / this.width);
               } else if (imgWidth < imgHeight && imgHeight > 300) {
                 imgWidth = Math.ceil((300 * this.width) / this.height);
                 imgHeight = 300;
