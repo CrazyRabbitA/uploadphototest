@@ -61,15 +61,8 @@
         console.log(file);
         console.log(initialSize);
         var u = navigator.userAgent;
-        alert(u);
+        // alert(u);
         console.log(u);
-        if (u.match(/iphone/i)) {
-          alert('苹果手机');
-        } else if (u.match(/MI 8 Lite/i)) {
-          alert('小米8青春版');
-        } else {
-          alert('不是苹果和小米8');
-        }
 
         if (file) {
           EXIF.getData(file, function() {
@@ -98,37 +91,41 @@
                 ctx = canvas.getContext('2d');
               canvas.width = imgWidth;
               canvas.height = imgHeight;
-              if (Orientation && Orientation != 1) {
-                switch (Orientation) {
-                  case 6: // 旋转90度
-                    canvas.width = imgHeight;
-                    canvas.height = imgWidth;
-                    ctx.rotate(Math.PI / 2);
-                    // (0,-imgHeight) 从旋转原理图那里获得的起始点
-                    ctx.drawImage(this, 0, -imgHeight, imgWidth, imgHeight);
-                    alert('这次故意不做处理');
-                    break;
-                  case 3: // 旋转180度
-                    ctx.rotate(Math.PI);
-                    ctx.drawImage(
-                      this,
-                      -imgWidth,
-                      -imgHeight,
-                      imgWidth,
-                      imgHeight
-                    );
-                    break;
-                  case 8: // 旋转-90度
-                    canvas.width = imgHeight;
-                    canvas.height = imgWidth;
-                    ctx.rotate((3 * Math.PI) / 2);
-                    ctx.drawImage(this, -imgWidth, 0, imgWidth, imgHeight);
-                    break;
+              if (u.match(/iphone/i) || u.match(/MI 8 Lite/i)) {
+                alert('对苹果手机和小米8进行处理');
+                if (Orientation && Orientation != 1) {
+                  switch (Orientation) {
+                    case 6: // 旋转90度
+                      canvas.width = imgHeight;
+                      canvas.height = imgWidth;
+                      ctx.rotate(Math.PI / 2);
+                      // (0,-imgHeight) 从旋转原理图那里获得的起始点
+                      ctx.drawImage(this, 0, -imgHeight, imgWidth, imgHeight);
+                      alert('对竖直拍摄的图片进行处理');
+                      break;
+                    case 3: // 旋转180度
+                      ctx.rotate(Math.PI);
+                      ctx.drawImage(
+                        this,
+                        -imgWidth,
+                        -imgHeight,
+                        imgWidth,
+                        imgHeight
+                      );
+                      break;
+                    case 8: // 旋转-90度
+                      canvas.width = imgHeight;
+                      canvas.height = imgWidth;
+                      ctx.rotate((3 * Math.PI) / 2);
+                      ctx.drawImage(this, -imgWidth, 0, imgWidth, imgHeight);
+                      break;
+                  }
                 }
               } else {
+                alert('不是苹果和小米8');
                 ctx.drawImage(this, 0, 0, imgWidth, imgHeight);
               }
-              preview.src = canvas.toDataURL('image/jpeg', 1);
+              preview.src = canvas.toDataURL('image/jpeg', 0.9);
             };
           };
           reader.readAsDataURL(file);
