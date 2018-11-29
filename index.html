@@ -94,13 +94,14 @@
               canvas.height = imgHeight;
               if (Orientation && Orientation != 1) {
                 switch (Orientation) {
-                  // case 6: // 旋转90度
-                  //   canvas.width = imgHeight;
-                  //   canvas.height = imgWidth;
-                  //   ctx.rotate(Math.PI / 2);
-                  //   // (0,-imgHeight) 从旋转原理图那里获得的起始点
-                  //   ctx.drawImage(this, 0, -imgHeight, imgWidth, imgHeight);
-                  //   break;
+                  case 6: // 旋转90度
+                    // canvas.width = imgHeight;
+                    // canvas.height = imgWidth;
+                    // ctx.rotate(Math.PI / 2);
+                    // // (0,-imgHeight) 从旋转原理图那里获得的起始点
+                    // ctx.drawImage(this, 0, -imgHeight, imgWidth, imgHeight);
+                    alert('这次故意不做处理');
+                    break;
                   case 3: // 旋转180度
                     ctx.rotate(Math.PI);
                     ctx.drawImage(
