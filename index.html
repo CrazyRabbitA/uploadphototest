@@ -93,9 +93,9 @@
               canvas.height = imgHeight;
               if (u.match(/iphone/i) || u.match(/MI 8 Lite/i)) {
                 alert('对苹果手机和小米8进行处理');
-                if (Orientation && Orientation != 6) {
+                if (Orientation && Orientation != 1) {
                   switch (Orientation) {
-                    case 3: // 旋转90度
+                    case 6: // 旋转90度
                       canvas.width = imgHeight;
                       canvas.height = imgWidth;
                       ctx.rotate(Math.PI / 2);
@@ -103,7 +103,7 @@
                       ctx.drawImage(this, 0, -imgHeight, imgWidth, imgHeight);
                       alert('对竖直拍摄的图片进行处理');
                       break;
-                    case 8: // 旋转180度
+                    case 3: // 旋转180度
                       ctx.rotate(Math.PI);
                       ctx.drawImage(
                         this,
@@ -113,7 +113,7 @@
                         imgHeight
                       );
                       break;
-                    case 1: // 旋转-90度
+                    case 8: // 旋转-90度
                       canvas.width = imgHeight;
                       canvas.height = imgWidth;
                       ctx.rotate((3 * Math.PI) / 2);
