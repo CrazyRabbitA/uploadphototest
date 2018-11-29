@@ -14,6 +14,11 @@
         width: 100px;
         height: 100px;
       }
+      #preview {
+        display: inline-block;
+        width: 300px;
+        height: 300px;
+      }
     </style>
   </head>
   <body>
@@ -80,12 +85,12 @@
               console.log(imgHeight);
 
               // 控制上传图片的宽高
-              if (imgWidth > imgHeight && imgWidth > 350) {
-                imgWidth = 350;
-                imgHeight = Math.ceil((350 * this.height) / this.width);
-              } else if (imgWidth < imgHeight && imgHeight > 300) {
-                imgWidth = Math.ceil((300 * this.width) / this.height);
-                imgHeight = 300;
+              if (imgWidth > imgHeight && imgWidth > 1000) {
+                imgWidth = 1000;
+                imgHeight = Math.ceil((1000 * this.height) / this.width);
+              } else if (imgWidth < imgHeight && imgHeight > 1000) {
+                imgWidth = Math.ceil((1000 * this.width) / this.height);
+                imgHeight = 1000;
               }
 
               var canvas = document.createElement('canvas'),
@@ -122,7 +127,7 @@
               } else {
                 ctx.drawImage(this, 0, 0, imgWidth, imgHeight);
               }
-              preview.src = canvas.toDataURL('image/jpeg', 0.8);
+              preview.src = canvas.toDataURL('image/jpeg', 1);
             };
           };
           reader.readAsDataURL(file);
