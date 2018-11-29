@@ -60,15 +60,12 @@
         initialSize = returnFileSize(file.size);
         console.log(file);
         console.log(initialSize);
-
         var u = navigator.userAgent;
-        // if (file) {
-        //   EXIF.getData(file, function() {
-        //     Orientation = EXIF.getTag(this, 'Orientation');
-        //     alert(Orientation);
-        //     alert(u);
-        //   });
-        // }
+        if (u.match(/iphone/i)) {
+          alert('苹果手机');
+        } else {
+          alert('不是苹果手机');
+        }
 
         if (file) {
           EXIF.getData(file, function() {
