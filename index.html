@@ -29,7 +29,7 @@
     <script src="exif.js"></script>
     <script>
       // 获取 input 元素
-      var input = document.querySelector('input');
+      var input = document.querySelector('#image_uploads');
       // 获取 preview 元素
       var preview = document.querySelector('.preview');
       input.onchange = function() {
@@ -37,6 +37,7 @@
           reader = new FileReader(),
           image = new Image();
         Orientation = null;
+        console.log(file);
         var u = navigator.userAgent;
         if (file) {
           EXIF.getData(file, function() {
