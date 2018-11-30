@@ -95,15 +95,15 @@
                 alert('对苹果手机和小米8进行处理');
                 if (Orientation && Orientation != 1) {
                   switch (Orientation) {
-                    case 6: // 旋转90度
+                    case 6:
                       canvas.width = imgHeight;
                       canvas.height = imgWidth;
                       ctx.rotate(Math.PI / 2);
                       // (0,-imgHeight) 从旋转原理图那里获得的起始点
                       ctx.drawImage(this, 0, -imgHeight, imgWidth, imgHeight);
-                      alert('对竖直拍摄的图片进行处理');
+                      alert('正着拍的，要处理顺时针旋转90度矫正');
                       break;
-                    case 3: // 旋转180度
+                    case 3:
                       ctx.rotate(Math.PI);
                       ctx.drawImage(
                         this,
@@ -112,15 +112,18 @@
                         imgWidth,
                         imgHeight
                       );
+                      alert('顺时针90度拍的，要顺时针旋转180度矫正');
                       break;
-                    case 8: // 旋转-90度
+                    case 8:
                       canvas.width = imgHeight;
                       canvas.height = imgWidth;
                       ctx.rotate((3 * Math.PI) / 2);
                       ctx.drawImage(this, -imgWidth, 0, imgWidth, imgHeight);
+                      alert('倒着拍的，要顺时针旋转270度矫正');
                       break;
                   }
                 } else {
+                  alert('逆时针90度拍的，或者没有方向信息，不需要矫正');
                   ctx.drawImage(this, 0, 0, imgWidth, imgHeight);
                 }
               } else {
